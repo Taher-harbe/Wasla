@@ -97,7 +97,8 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: () {
-                      // منطق الدخول
+                      // منطق الدخول - للتجربة سننتقل لشاشة السائق
+                      Navigator.pushReplacementNamed(context, '/driver-home');
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 56),

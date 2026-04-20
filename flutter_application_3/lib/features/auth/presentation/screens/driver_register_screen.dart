@@ -92,7 +92,10 @@ class _DriverRegisterScreenState extends State<DriverRegisterScreen> {
             ),
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // الانتقال لشاشة السائق الرئيسية بعد التسجيل
+                Navigator.pushReplacementNamed(context, '/driver-home');
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 56),
                 backgroundColor: Theme.of(context).colorScheme.primary,

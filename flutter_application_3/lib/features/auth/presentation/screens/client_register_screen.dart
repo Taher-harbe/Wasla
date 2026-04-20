@@ -92,7 +92,10 @@ class ClientRegisterScreen extends StatelessWidget {
 
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // الانتقال لشاشة العميل الرئيسية بعد التسجيل
+                Navigator.pushReplacementNamed(context, '/client-home');
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 56),
                 backgroundColor: colorScheme.primary,
