@@ -7,23 +7,17 @@ class ClientRegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // تحديد ما إذا كان النظام في الوضع الداكن
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
-      // استخدام لون الخلفية من الثيم ليدعم الدارك مود تلقائياً
-      backgroundColor: colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorScheme.primary),
+          icon: const Icon(Icons.arrow_back_outlined),
           onPressed: () => Navigator.pop(context),
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -33,62 +27,83 @@ class ClientRegisterScreen extends StatelessWidget {
                 fontFamily: 'Manrope',
                 fontSize: 24,
                 fontWeight: FontWeight.w900,
-                color: colorScheme.primary,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(height: 32),
-            const Text(
+            Text(
               'إنشاء حساب عميل',
-              style: TextStyle(
-                fontFamily: 'Manrope',
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineMedium?.copyWith(fontSize: 32),
             ),
-            const Text(
+            Text(
               'ابحث عن سائقين موثوقين لنقلك',
-              style: TextStyle(color: Colors.grey, fontFamily: 'Inter'),
+              style: TextStyle(
+                color: Colors.grey.shade600,
+                fontFamily: 'Inter',
+                fontSize: 16,
+              ),
             ),
             const SizedBox(height: 40),
 
             _buildFieldLabel("الاسم الكامل"),
-            _buildTextField(context, hint: 'محمد علي'),
+            const TextField(
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(hintText: 'محمد علي'),
+            ),
 
             const SizedBox(height: 20),
             _buildFieldLabel("البريد الإلكتروني"),
-            _buildTextField(context, hint: 'name@example.com'),
+            const TextField(
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(hintText: 'name@example.com'),
+            ),
 
             const SizedBox(height: 20),
             _buildFieldLabel("رقم الهاتف"),
             Row(
               children: [
                 Container(
+                  height: 55,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 16,
                   ),
                   decoration: BoxDecoration(
-                    // تغيير لون خلفية كود الدولة في الدارك مود
-                    color: isDark ? Colors.white10 : const Color(0xFFF4F3FA),
-                    borderRadius: BorderRadius.circular(16),
+                    color: Theme.of(context).inputDecorationTheme.fillColor,
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: const Text(
                     '+20',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
                 const SizedBox(width: 12),
-                Expanded(child: _buildTextField(context, hint: '123 456 7890')),
+                const Expanded(
+                  child: TextField(
+                    textAlign: TextAlign.right,
+                    decoration: InputDecoration(hintText: '123 456 7890'),
+                  ),
+                ),
               ],
             ),
 
             const SizedBox(height: 20),
             _buildFieldLabel("كلمة المرور"),
-            _buildTextField(context, hint: '********', isPassword: true),
+            const TextField(
+              obscureText: true,
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(hintText: '********'),
+            ),
 
             const SizedBox(height: 20),
             _buildFieldLabel("تأكيد كلمة المرور"),
-            _buildTextField(context, hint: '********', isPassword: true),
+            const TextField(
+              obscureText: true,
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(hintText: '********'),
+            ),
 
             const SizedBox(height: 40),
             ElevatedButton(
@@ -96,21 +111,7 @@ class ClientRegisterScreen extends StatelessWidget {
                 // الانتقال لشاشة العميل الرئيسية بعد التسجيل
                 Navigator.pushReplacementNamed(context, '/client-home');
               },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 56),
-                backgroundColor: colorScheme.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
-              ),
-              child: const Text(
-                'إنشاء الحساب',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: const Text('إنشاء الحساب'),
             ),
             const SizedBox(height: 24),
           ],
@@ -123,38 +124,14 @@ class ClientRegisterScreen extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0, right: 4),
+        padding: const EdgeInsets.only(bottom: 12.0, right: 4),
         child: Text(
           label,
           style: const TextStyle(
             fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
-            fontSize: 14,
+            fontSize: 16,
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextField(
-    BuildContext context, {
-    required String hint,
-    bool isPassword = false,
-  }) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return TextField(
-      obscureText: isPassword,
-      textAlign: TextAlign.right,
-      decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: const TextStyle(color: Colors.grey),
-        filled: true,
-        // تغيير لون الحقل ليكون داكناً في الدارك مود
-        fillColor: isDark ? Colors.white10 : const Color(0xFFF4F3FA),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
         ),
       ),
     );

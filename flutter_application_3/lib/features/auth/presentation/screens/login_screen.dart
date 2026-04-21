@@ -7,23 +7,17 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // سحب ألوان الثيم الحالي
-    final colorScheme = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      backgroundColor: colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        // الرجوع للخلف باستخدام Navigator
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorScheme.primary),
+          icon: const Icon(Icons.arrow_back_outlined),
           onPressed: () => Navigator.pop(context),
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             const SizedBox(height: 20),
@@ -33,136 +27,101 @@ class LoginScreen extends StatelessWidget {
                 fontFamily: 'Manrope',
                 fontSize: 32,
                 fontWeight: FontWeight.w900,
-                color: colorScheme.primary,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(height: 40),
-            const Text(
+            Text(
               'مرحباً بعودتك',
-              style: TextStyle(
-                fontFamily: 'Manrope',
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineMedium?.copyWith(fontSize: 28),
             ),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               'ادخل إلى حسابك وتتبع رحلاتك القادمة.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
             ),
             const SizedBox(height: 48),
 
             // حاوية الحقول (Card)
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                // استخدام لون الكارد من الثيم
-                color: Theme.of(context).cardTheme.color,
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: isDark
-                    ? []
-                    : [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.05),
-                          blurRadius: 20,
-                        ),
-                      ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end, // للمحاذاة العربية
-                children: [
-                  const Text(
-                    'البريد الإلكتروني',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 8),
-                  _buildTextField(
-                    context,
-                    hint: 'example@wasla.com',
-                    icon: Icons.email_outlined,
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'كلمة المرور',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 8),
-                  _buildTextField(
-                    context,
-                    hint: '********',
-                    icon: Icons.lock_outline,
-                    isPassword: true,
-                  ),
-                  const SizedBox(height: 32),
-                  ElevatedButton(
-                    onPressed: () {
-                      // منطق الدخول - للتجربة سننتقل لشاشة السائق
-                      Navigator.pushReplacementNamed(context, '/driver-home');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 56),
-                      backgroundColor: colorScheme.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                    ),
-                    child: const Text(
-                      'تسجيل الدخول',
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(28),
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.end, // للمحاذاة العربية
+                  children: [
+                    const Text(
+                      'البريد الإلكتروني',
                       style: TextStyle(
-                        color: Colors.white,
                         fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        GestureDetector(
-                          onTap: () =>
-                              Navigator.pushNamed(context, '/role-selection'),
-                          child: Text(
-                            ' سجل الآن',
-                            style: TextStyle(
-                              color: colorScheme.primary,
-                              fontWeight: FontWeight.bold,
+                    const SizedBox(height: 12),
+                    TextField(
+                      textAlign: TextAlign.right,
+                      decoration: const InputDecoration(
+                        hintText: 'example@wasla.com',
+                        suffixIcon: Icon(Icons.email_outlined),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      'كلمة المرور',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      obscureText: true,
+                      textAlign: TextAlign.right,
+                      decoration: const InputDecoration(
+                        hintText: '********',
+                        suffixIcon: Icon(Icons.lock_outlined),
+                      ),
+                    ),
+                    const SizedBox(height: 36),
+                    ElevatedButton(
+                      onPressed: () {
+                        // منطق الدخول - للتجربة سننتقل لشاشة السائق
+                        Navigator.pushReplacementNamed(context, '/driver-home');
+                      },
+                      child: const Text('تسجيل الدخول'),
+                    ),
+                    const SizedBox(height: 24),
+                    Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, '/role-selection'),
+                            child: Text(
+                              ' سجل الآن',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                        ),
-                        const Text(' ليس لديك حساب؟'),
-                      ],
+                          const Text(
+                            ' ليس لديك حساب؟',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextField(
-    BuildContext context, {
-    required String hint,
-    required IconData icon,
-    bool isPassword = false,
-  }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return TextField(
-      obscureText: isPassword,
-      textAlign: TextAlign.right,
-      decoration: InputDecoration(
-        hintText: hint,
-        hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-        suffixIcon: Icon(icon, color: Colors.grey), // أيقونة جهة اليمين للعربي
-        filled: true,
-        fillColor: isDark ? Colors.white10 : const Color(0xFFF4F3FA),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
         ),
       ),
     );

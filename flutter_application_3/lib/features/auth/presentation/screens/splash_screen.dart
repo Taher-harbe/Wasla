@@ -42,9 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
-                    Icons.local_shipping,
+                    Icons.local_shipping_outlined,
                     size: 60,
-                    color: Color(0xFF00236F),
+                    color: Color(0xFF1A357D),
                   ),
                 ),
                 const SizedBox(height: 24),

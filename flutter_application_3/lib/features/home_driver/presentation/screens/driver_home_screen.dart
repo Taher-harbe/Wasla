@@ -67,8 +67,8 @@ class DriverHomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: colorScheme.primary,
-        child: const Icon(Icons.add, color: Colors.white, size: 30),
+        backgroundColor: const Color(0xFF1A357D),
+        child: const Icon(Icons.add_outlined, color: Colors.white, size: 30),
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.startFloat, // ليتناسب مع التصميم العربي
@@ -97,7 +97,7 @@ class DriverHomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15),
-          Icon(Icons.menu_rounded, size: 30, color: colorScheme.onSurface),
+          Icon(Icons.menu_outlined, size: 30, color: colorScheme.onSurface),
         ],
       ),
     );
@@ -274,11 +274,11 @@ class DriverHomeScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: colorScheme.primary,
+                  backgroundColor: const Color(0xFF1A357D),
                   foregroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   minimumSize: const Size(120, 44),
                 ),
@@ -297,7 +297,7 @@ class DriverHomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 4),
                   const Icon(
-                    Icons.access_time_rounded,
+                    Icons.access_time_outlined,
                     color: Colors.orange,
                     size: 16,
                   ),
@@ -317,7 +317,7 @@ class DriverHomeScreen extends StatelessWidget {
   ) {
     return Column(
       children: [
-        _locationRow(pickup, Icons.circle, Colors.blue),
+        _locationRow(pickup, Icons.circle_outlined, Colors.blue),
         Align(
           alignment: Alignment.centerRight,
           child: Container(
@@ -327,7 +327,7 @@ class DriverHomeScreen extends StatelessWidget {
             color: Colors.grey.withValues(alpha: 0.3),
           ),
         ),
-        _locationRow(dropoff, Icons.location_on_rounded, Colors.green),
+        _locationRow(dropoff, Icons.location_on_outlined, Colors.green),
       ],
     );
   }
@@ -363,22 +363,22 @@ class DriverHomeScreen extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.explore_outlined),
-          activeIcon: Icon(Icons.explore),
+          activeIcon: Icon(Icons.explore_outlined),
           label: "بالقرب مني",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_balance_wallet_outlined),
-          activeIcon: Icon(Icons.account_balance_wallet),
+          activeIcon: Icon(Icons.account_balance_wallet_outlined),
           label: "عروضي",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.local_shipping_outlined),
-          activeIcon: Icon(Icons.local_shipping),
+          activeIcon: Icon(Icons.local_shipping_outlined),
           label: "نشط",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          activeIcon: Icon(Icons.person),
+          icon: Icon(Icons.person_outlined),
+          activeIcon: Icon(Icons.person_outlined),
           label: "حسابي",
         ),
       ],

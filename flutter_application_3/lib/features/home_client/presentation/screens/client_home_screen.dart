@@ -30,7 +30,7 @@ class ClientHomeScreen extends StatelessWidget {
             Icon(
               Icons.inventory_2_outlined,
               size: 100,
-              color: colorScheme.primary,
+              color: const Color(0xFF1A357D),
             ),
             const SizedBox(height: 24),
             Text(
@@ -50,13 +50,14 @@ class ClientHomeScreen extends StatelessWidget {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                // منطق إنشاء طلب جديد
+                // الانتقال لشاشة إضافة طلب جديد
+                Navigator.pushNamed(context, '/add-order');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: colorScheme.primary,
+                backgroundColor: const Color(0xFF1A357D),
                 minimumSize: const Size(200, 50),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(30),
                 ),
               ),
               child: const Text(

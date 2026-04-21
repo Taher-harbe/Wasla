@@ -130,9 +130,9 @@ class RoleSelectionScreen extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // أيقونة السهم جهة اليسار
+            // أيقونة السهم جهة اليسار - استخدام outlined version
             Icon(
-              Icons.arrow_back,
+              Icons.arrow_back_outlined,
               color: Theme.of(context).colorScheme.primary,
               size: 20,
             ),

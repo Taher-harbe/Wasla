@@ -20,9 +20,16 @@ class _DriverRegisterScreenState extends State<DriverRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_outlined),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             Text(
@@ -35,81 +42,84 @@ class _DriverRegisterScreenState extends State<DriverRegisterScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               'إنشاء حساب سائق',
-              style: TextStyle(
-                fontFamily: 'Manrope',
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineMedium?.copyWith(fontSize: 32),
             ),
             const SizedBox(height: 32),
-            _buildTextField(
-              context,
-              hint: 'الاسم الكامل',
-              icon: Icons.person_outline,
+
+            const TextField(
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                hintText: 'الاسم الكامل',
+                suffixIcon: Icon(Icons.person_outlined),
+              ),
             ),
             const SizedBox(height: 16),
-            _buildTextField(
-              context,
-              hint: 'البريد الإلكتروني',
-              icon: Icons.email_outlined,
+
+            const TextField(
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                hintText: 'البريد الإلكتروني',
+                suffixIcon: Icon(Icons.email_outlined),
+              ),
             ),
             const SizedBox(height: 16),
-            _buildTextField(
-              context,
-              hint: 'رقم الهاتف',
-              icon: Icons.phone_outlined,
+
+            const TextField(
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                hintText: 'رقم الهاتف',
+                suffixIcon: Icon(Icons.phone_outlined),
+              ),
             ),
             const SizedBox(height: 16),
-            _buildTextField(
-              context,
-              hint: 'كلمة المرور',
-              icon: Icons.lock_outline,
-              isPassword: true,
+
+            const TextField(
+              obscureText: true,
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                hintText: 'كلمة المرور',
+                suffixIcon: Icon(Icons.lock_outlined),
+              ),
             ),
             const SizedBox(height: 24),
             const Divider(),
             const SizedBox(height: 24),
+
             const Align(
               alignment: Alignment.centerRight,
               child: Text(
                 'تفاصيل المركبة',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
             const SizedBox(height: 16),
+
             _buildDropdownField(
               context,
               'نوع المركبة',
               Icons.local_shipping_outlined,
             ),
             const SizedBox(height: 16),
-            _buildTextField(
-              context,
-              hint: 'لوحة الترخيص',
-              icon: Icons.featured_play_list_outlined,
+
+            const TextField(
+              textAlign: TextAlign.right,
+              decoration: InputDecoration(
+                hintText: 'لوحة الترخيص',
+                suffixIcon: Icon(Icons.assignment_outlined),
+              ),
             ),
             const SizedBox(height: 40),
+
             ElevatedButton(
               onPressed: () {
                 // الانتقال لشاشة السائق الرئيسية بعد التسجيل
                 Navigator.pushReplacementNamed(context, '/driver-home');
               },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 56),
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
-              ),
-              child: const Text(
-                'إنشاء الحساب',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: const Text('إنشاء الحساب'),
             ),
             const SizedBox(height: 24),
           ],
@@ -118,38 +128,14 @@ class _DriverRegisterScreenState extends State<DriverRegisterScreen> {
     );
   }
 
-  Widget _buildTextField(
-    BuildContext context, {
-    required String hint,
-    required IconData icon,
-    bool isPassword = false,
-  }) {
-    return TextField(
-      obscureText: isPassword,
-      textAlign: TextAlign.right,
-      decoration: InputDecoration(
-        hintText: hint,
-        suffixIcon: Icon(icon, color: Colors.grey),
-        filled: true,
-        fillColor: Theme.of(context).brightness == Brightness.dark
-            ? Colors.white10
-            : const Color(0xFFF4F3FA),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
-        ),
-      ),
-    );
-  }
-
   Widget _buildDropdownField(BuildContext context, String hint, IconData icon) {
     return Container(
+      width: double.infinity,
+      height: 55,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.white10
-            : const Color(0xFFF4F3FA),
-        borderRadius: BorderRadius.circular(16),
+        color: Theme.of(context).inputDecorationTheme.fillColor,
+        borderRadius: BorderRadius.circular(15),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
@@ -157,7 +143,15 @@ class _DriverRegisterScreenState extends State<DriverRegisterScreen> {
           value: _selectedVehicle,
           hint: Align(
             alignment: Alignment.centerRight,
-            child: Text(hint, style: const TextStyle(color: Colors.grey)),
+            child: Text(
+              hint,
+              style: TextStyle(
+                color:
+                    Theme.of(context).inputDecorationTheme.hintStyle?.color ??
+                    Colors.grey,
+                fontSize: 16,
+              ),
+            ),
           ),
           items: _vehicleTypes
               .map(
@@ -165,7 +159,10 @@ class _DriverRegisterScreenState extends State<DriverRegisterScreen> {
                   value: v['value'],
                   child: Align(
                     alignment: Alignment.centerRight,
-                    child: Text(v['label']!),
+                    child: Text(
+                      v['label']!,
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
               )

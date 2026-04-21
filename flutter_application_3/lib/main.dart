@@ -9,6 +9,7 @@ import 'features/auth/presentation/screens/client_register_screen.dart';
 import 'features/auth/presentation/screens/driver_register_screen.dart';
 import 'features/home_driver/presentation/screens/driver_home_screen.dart';
 import 'features/home_client/presentation/screens/client_home_screen.dart';
+import 'features/home_client/presentation/screens/add_order_screen.dart';
 
 void main() {
   runApp(const WaslaApp());
@@ -38,6 +39,7 @@ class WaslaApp extends StatelessWidget {
               '/register/driver': (context) => const DriverRegisterScreen(),
               '/driver-home': (context) => const DriverHomeScreen(),
               '/client-home': (context) => const ClientHomeScreen(),
+              '/add-order': (context) => const AddOrderScreen(),
             },
           );
         },
